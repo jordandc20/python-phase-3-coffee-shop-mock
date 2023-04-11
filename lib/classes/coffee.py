@@ -2,15 +2,26 @@ from classes.order import Order
 
 class Coffee:
     def __init__(self, name):
-        self._name = name
+        self.name = name
 
-    def get_name(self):
+    @property
+    def name(self):
         return self._name
     
-    def set_name(self,name):
-        pass
+    @name.setter
+    def name(self,name):
+        if not hasattr(self,"name"):
+            self._name = name
+            
+### alt syntax
+
+    # def get_name(self):
+    #     return self._name
     
-    name = property (get_name, set_name)
+    # def set_name(self,name):
+    #     pass
+    
+    # name = property (get_name, set_name)
     
     def orders(self):
         all_orders=Order.all_orders()
@@ -24,7 +35,10 @@ class Coffee:
         return len(self.orders())
     
     def average_price(self):
-        sum_all_prices = sum([order.price for order in self.orders()])      
+        orders  =self.orders()
+        if len(self.orders())==0:
+            return 0
+        sum_all_prices = sum([order.price for order in orders])      
         return sum_all_prices/self.num_orders() 
 
 # Coffee num_orders()

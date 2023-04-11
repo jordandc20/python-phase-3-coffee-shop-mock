@@ -2,11 +2,19 @@
 class Order:
     all = []
     def __init__(self, customer, coffee, price):
-        if 1<= price <= 10:
-            self.price = price
-            self.customer = customer
-            self.coffee = coffee
+        self.price = price
+        self.customer = customer
+        self.coffee = coffee
         Order.all.append(self)  
+    
+    @property
+    def price(self):
+        return self._price
+    
+    @price.setter
+    def price(self,price):
+        if 1<= price <= 10:
+            self._price = price
     
     @classmethod
     def all_orders(cls):

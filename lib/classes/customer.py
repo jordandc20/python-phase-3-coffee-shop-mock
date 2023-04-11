@@ -2,16 +2,28 @@ from classes.order import Order
 
 class Customer:
     def __init__(self, name):
-        self._name = name
-            
-    def get_name(self):
+        self.name = name
+    
+    @property
+    def name(self):
         return self._name
     
-    def set_name(self,name):
-        if isinstance(name, str) and 1 <= len(name) <= 15:
+    @name.setter
+    def name (self,name):
+        if type(name) is str and 1 <= len(name) <= 15:
             self._name = name
+        else:
+            raise Exception ('name must be xyz')
+### alt syntax
+            
+    # def get_name(self):
+    #     return self._name
     
-    name = property(get_name, set_name)    
+    # def set_name(self,name):
+    #     if isinstance(name, str) and 1 <= len(name) <= 15:
+    #         self._name = name
+    
+    # name = property(get_name, set_name)    
 
     def orders(self):
         all_orders=Order.all_orders()
